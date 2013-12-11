@@ -2,7 +2,7 @@ var app = require('http').createServer(handler)
   , io = require('socket.io').listen(app)
   , fs = require('fs'), _ = require('underscore')
 
-app.listen(80);
+app.listen(8080);
 
 var commands = {
   '/join': function(socket, input) {
