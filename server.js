@@ -97,16 +97,18 @@ var used_names = [];
 
 
 function handler (req, res) {
-  fs.readFile(__dirname + '/index.html',
-  function (err, data) {
-    if (err) {
-      res.writeHead(500);
-      return res.end('Error loading index.html');
-    }
+  // fs.readFile(__dirname + '/index.html',
+  // function (err, data) {
+  //   if (err) {
+  //     res.writeHead(500);
+  //     return res.end('Error loading index.html');
+  //   }
 
-    res.writeHead(200);
-    res.end(data);
-  });
+  //   res.writeHead(200);
+  //   res.end(data);
+  // });
+  res.writeHead(200);
+  res.end();
 }
 
 var event_router = function (input) {
