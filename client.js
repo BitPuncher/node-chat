@@ -12,7 +12,7 @@ var server_prompt = function(data) {
 };
 
 
-socket = require('socket.io-client').connect('http://guarded-savannah-9110.herokuapp.com');
+socket = require('socket.io-client').connect('http://guarded-savannah-9110.herokuapp.com:8080');
 socket.on('connect', function(){
   socket.on('output', function(data){
   	console.log(data['output']);
