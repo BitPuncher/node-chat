@@ -1,0 +1,26 @@
+{
+  "name": "chatter",
+  "version": "0.0.0",
+  "description": "Javascript chat client using node.js and socket.io",
+  "main": "server.js",
+  "dependencies": {
+    "read": "~1.0.5",
+    "socket.io": "~0.9.16",
+    "socket.io-client": "~0.9.16",
+    "underscore": "~1.5.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BitPuncher/node_chat"
+  },
+  "author": "Jefferson Leard",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/BitPuncher/node_chat/issues"
+  }
+}
