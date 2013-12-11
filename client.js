@@ -12,7 +12,7 @@ var server_prompt = function(data) {
 };
 
 
-socket = require('socket.io-client').connect('http://localhost:8080');
+socket = require('socket.io-client').connect('http://localhost:80');
 socket.on('connect', function(){
   socket.on('output', function(data){
   	console.log(data['output']);
