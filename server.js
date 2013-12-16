@@ -94,14 +94,14 @@ var commands = {
   '/tell': function(socket, input) {
     var targetUser = input.match(/^\S+/)[0];
     input = input.substring(targetUser.length + 1, input.length);
-    var targetSocket = socket;
+    var targetSocket = null;
     io.sockets.clients().forEach(function(el) {
       if (el.username == targetUser) {
         targetSocket = el;
       }
     });
 
-    if (targetSocket.username == socket.username) {
+    if (targetSocket == null) {
       socket.emit('output', { output:["Specified user" + targetUser + 
         "does not exist."] });
     } else {
