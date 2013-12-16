@@ -18,7 +18,7 @@ var output = function (data) {
 }
 
 
-socket = require('socket.io-client').connect('http://localhost:8080');
+socket = require('socket.io-client').connect('http://guarded-savannah-9110.herokuapp.com');
 socket.on('connect', function(){
   socket.on('output', output);
 
@@ -29,7 +29,7 @@ socket.on('connect', function(){
 			'prompt':'==> ',
 			'eval': function(cmd, context, filename, callback){
 				socket.emit('input', { input: cmd.substring(1, cmd.length - 2)} );
-				
+
 				if (cmd === "(/quit\n)") {
 					console.log("Goodbye!");
 					process.kill();
