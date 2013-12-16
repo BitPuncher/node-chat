@@ -1,6 +1,7 @@
-var app = require('http').createServer(handler)
-  , io = require('socket.io').listen(app)
-  , fs = require('fs'), _ = require('underscore')
+var router = require('./router.js'),
+    app = require('http').createServer(router),
+    io = require('socket.io').listen(app),
+    _ = require('underscore')
 
 app.listen(process.env.PORT || 8080);
 
@@ -116,20 +117,18 @@ var used_names = [];
 
 
 
-function handler (req, res) {
-  // fs.readFile(__dirname + '/index.html',
-  // function (err, data) {
-  //   if (err) {
-  //     res.writeHead(500);
-  //     return res.end('Error loading index.html');
-  //   }
+// function handler (req, res) {
+//   fs.readFile(__dirname + '/index.html',
+//   function (err, data) {
+//     if (err) {
+//       res.writeHead(500);
+//       return res.end('Error loading index.html');
+//     }
 
-  //   res.writeHead(200);
-  //   res.end(data);
-  // });
-  res.writeHead(200);
-  res.end();
-}
+//     res.writeHead(200, { 'content-type': 'text/html' });
+//     res.end(data);
+//   });
+// }
 
 var event_router = function (input) {
   if (input['input'][0] == '/') {
