@@ -2,8 +2,8 @@ repl = require('repl');
 read = require('read');
 util = require('util');
 
-var server_prompt = function(data) {
-	console.log(data['prompt']);
+var server_prompt = function (data) {
+	output(data);
 	read(
 	  {},
 		function (err, input, isDefault) {
@@ -11,24 +11,32 @@ var server_prompt = function(data) {
 		});
 };
 
+var output = function (data) {
+	data['output'].forEach(function (str) {
+  		console.log("<== " + str);
+  	});
+}
 
-socket = require('socket.io-client').connect('http://guarded-savannah-9110.herokuapp.com');
+
+socket = require('socket.io-client').connect('http://localhost:8080');
 socket.on('connect', function(){
-  socket.on('output', function(data){
-  	console.log(data['output']);
-  });
+  socket.on('output', output);
 
-  socket.on('login', server_prompt)
+  socket.on('login', server_prompt);
 
   socket.on('logged_in', function(){
   	repl.start({
 			'prompt':'==> ',
 			'eval': function(cmd, context, filename, callback){
 				socket.emit('input', { input: cmd.substring(1, cmd.length - 2)} );
+				
+				if (cmd === "(/quit\n)") {
+					console.log("Goodbye!");
+					process.kill();
+				}
 			},
 	  });
   });
 
   socket.on('disconnect', function(){});
-
 });
