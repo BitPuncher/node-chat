@@ -101,7 +101,7 @@ var commands = {
       }
     });
 
-    if (targetSocket == socket) {
+    if (targetSocket.username == socket.username) {
       socket.emit('output', { output:["Specified user" + targetUser + 
         "does not exist."] });
     } else {
