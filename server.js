@@ -102,8 +102,8 @@ var commands = {
     });
 
     if (targetSocket == null) {
-      socket.emit('output', { output:["Specified user" + targetUser + 
-        "does not exist."] });
+      socket.emit('output', { output:["Specified user " + targetUser + 
+        " does not exist."] });
     } else {
       socket.emit('output', { output:["to " + targetUser + ": " + input] });
       targetSocket.emit('output', { output:["from " + socket.username + 
