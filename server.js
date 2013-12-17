@@ -89,6 +89,8 @@ var commands = {
   },
 
   '/login': function(socket, input) {
+    input = input.replace(/\s/g, "_");
+
     if (used_names[input] == true){
       socket.emit('login', { output:["Name taken.", "Login Name?"] });
     }
