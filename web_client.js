@@ -11,7 +11,7 @@ var output = function (data) {
 	$('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
 }
 
-socket = io.connect('http://localhost:8080');
+socket = io.connect('http://guarded-savannah-9110/herokuapp.com');
 socket.on('connect', function(){
   socket.on('output', output);
 
