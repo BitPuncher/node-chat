@@ -73,11 +73,11 @@ var commands = {
   },
 
   '/login': function(socket, input) {
-    if (_.include(used_names, input)){
+    if (used_names[input] == true){
       socket.emit('login', { output:["Name taken.", "Login Name?"] });
     }
     else {
-      used_names.push(input);
+      used_names[input] = true;
       socket.username = input;
       socket.emit('logged_in');
       var outputArr = ["Welcome, " + socket.username];
@@ -113,22 +113,7 @@ var commands = {
   },
 };
 
-var used_names = [];
-
-
-
-// function handler (req, res) {
-//   fs.readFile(__dirname + '/index.html',
-//   function (err, data) {
-//     if (err) {
-//       res.writeHead(500);
-//       return res.end('Error loading index.html');
-//     }
-
-//     res.writeHead(200, { 'content-type': 'text/html' });
-//     res.end(data);
-//   });
-// }
+var used_names = {};
 
 var event_router = function (input) {
   if (input['input'][0] == '/') {
@@ -144,4 +129,9 @@ var event_router = function (input) {
 io.sockets.on('connection', function (socket) {
   socket.emit('login', { output:["Welcome to XYZ chat server.", "Login Name?"]});
   socket.on('input', event_router);
+  socket.on('disconnect', function() {
+    socket.broadcast.to(socket.currentRoom).emit('output',
+        { output:[socket.username + " has left the channel."]});
+    delete used_names[socket.username];
+  })
 });

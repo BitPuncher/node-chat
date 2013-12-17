@@ -1,5 +1,10 @@
-.chat-room {
-	height: 600px;
+#chatbox {
+	height: 400px;
 	width: 600px;
 	overflow-y: scroll;
+	border: solid black 1px;
+}
+
+.chat-message {
+	display: block;
 }
