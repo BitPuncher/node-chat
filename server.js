@@ -21,6 +21,15 @@ io.set('transports', [
   , 'jsonp-polling'
 ]);
 
+var publicCommands = {
+  '/help': true, 
+  '/rooms': true,
+  '/join': true,
+  '/leave': true,
+  '/tell': true,
+  '/quit': true,
+};
+
 var commands = {
   '/join': function(socket, input) {
     if (socket.currentRoom != null) {
@@ -80,7 +89,7 @@ var commands = {
 
   '/help': function(socket) {
     outputArr = ["List of commands."];
-    Object.keys(this).forEach(function(room) {
+    publicCommands.forEach(function(room) {
       outputArr.push("* " + room);
     })
     outputArr.push("end of list.");
@@ -129,6 +138,11 @@ var commands = {
         ": " + input] });
     }
   },
+
+  '/error': function(socket, input) {
+    var outputArr = ['ERROR: ' + input + ' is not a valid command.'];
+    socket.emit('output', { output: outputArr });
+  },
 };
 
 var used_names = {};
@@ -138,7 +152,11 @@ var event_router = function (input) {
     var command = input['input'].match(/^\S+/)[0];
     input = input['input'].substring(command.length + 1, input.length);
 
-    commands[command](this, input);
+    if (publicCommands[command] != null) {
+      commands[command](this, input);
+    } else {
+      commands['/error'](this, command);
+    }
   } else {
     commands['/send'](this, input['input']);
   }
