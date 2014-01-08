@@ -90,7 +90,7 @@ var commands = {
 
   '/help': function(socket) {
     outputArr = ["List of commands."];
-    publicCommands.forEach(function(room) {
+    Object.keys(publicCommands).forEach(function(room) {
       outputArr.push("* " + room);
     })
     outputArr.push("end of list.");
