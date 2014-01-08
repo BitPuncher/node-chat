@@ -27,6 +27,7 @@ var publicCommands = {
   '/join': true,
   '/leave': true,
   '/tell': true,
+  '/login': true,
   '/quit': true,
 };
 
